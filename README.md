@@ -32,7 +32,7 @@ If you are using the repository for the first time, then please start with terra
 
 ### Running ETL over datasource
 Once essential components(glue datasource connection, catlog database, crawler, glue job)
-run the crawler to detect schema/table and then once completed start the glue job.
+are created run the crawler to detect schema/table and then once completed start the glue job.
 
 ### End result
 Transformed file can be found at the s3 location specified in the ETL script.
