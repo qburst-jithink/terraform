@@ -8,12 +8,12 @@ Exapmle guide link (Ubuntu) : https://developer.hashicorp.com/terraform/tutorial
 
 
 ### Clone the git repo and navigate into the repo
-```git clone https://code.qburst.com/anandakrishnan.r/terraform_de_engagement.git```
+```git clone https://github.com/qburst-jithink/terraform.git```
 
 
 If you are using the repository for the first time, then please start with terraform init in project root directory:
 
-```teraform init```
+```terraform init```
 
 ### Replace access keys and secret keys with your own keys
 
@@ -23,7 +23,7 @@ If you are using the repository for the first time, then please start with terra
 
 ### To create the planned resources:
 
-```teraform apply```
+```terraform apply```
 
 ### To destroy all the created resources:
 

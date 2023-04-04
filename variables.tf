@@ -3,6 +3,13 @@ variable "aws-glue-role" {
    default = "arn:aws:iam::789733903478:role/service-role/AWSGlueServiceRole"
 }
 
+#RDS instance configuration
+variable "rds-instance" {
+  default = "database-for-glue-terraform"
+}
+
+
+
 # s3 configurations
 variable "script-location" {
   default = "s3://sample-rds-glue-bucket/teraform/scripts/postgres_to_s3_parquet.py"

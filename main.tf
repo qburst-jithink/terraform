@@ -10,8 +10,10 @@ terraform {
 #Authenitaction happens here
 provider "aws" {
     region = "eu-north-1"
-    access_key = "****"
-    secret_key = "**************"
+#We can directly assign string values for access and secret keys or we can 
+#store keys with a variable file (creds.tf)
+    access_key = element(var.creds,0) #replace >> element(var.creds,0) with access key
+    secret_key = element(var.creds,1) #replace >> element(var.creds,1) with secret key
 }
 
 
@@ -27,9 +29,9 @@ resource "aws_glue_connection" "glue_connection" {
   name = var.glue-connection-name
 
   physical_connection_requirements {
-    availability_zone      = "eu-north-1a"
-    security_group_id_list = ["sg-0bb777573b4c44864"]
-    subnet_id              = "subnet-04c0c3337404ca35a"
+    availability_zone      = data.aws_db_instance.rds.availability_zone
+    security_group_id_list = data.aws_db_instance.rds.vpc_security_groups
+    subnet_id              = element(tolist(data.aws_db_subnet_group.db-subnet-group.subnet_ids),0)
   }
 }
 
@@ -84,4 +86,12 @@ data "aws_secretsmanager_secret" "secret-name" {
 }
 data "aws_secretsmanager_secret_version" "secret-version" {
   secret_id = data.aws_secretsmanager_secret.secret-name.id
+}
+
+#Retrieve RDS instance 
+data "aws_db_instance" "rds" {
+  db_instance_identifier = var.rds-instance
+}
+data "aws_db_subnet_group" "db-subnet-group" {
+  name = data.aws_db_instance.rds.db_subnet_group
 }
